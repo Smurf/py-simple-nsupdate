@@ -23,6 +23,7 @@ SERVER="192.168.0.1"
 TTL=3600
 KEY_NAME="my-tsig-key"
 KEY_SECRET="EbWygMunevergonnagiveyouupnevergonnaletyoudown5ad11PK9nROPEaIg=="
+KEY_ALGO="hmac-sha512"
 ```
 
 ```
