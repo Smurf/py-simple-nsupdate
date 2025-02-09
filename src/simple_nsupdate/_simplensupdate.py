@@ -52,6 +52,7 @@ class NSUpdater:
         ttl: Optional[int] = None,
         key_name: Optional[str] = None,
         key_secret: Optional[str] = None,
+        key_algo: Optional[str] = None
     ):
         env_conf = dotenv_values(".env")
 
@@ -68,6 +69,8 @@ class NSUpdater:
         )
 
         self.ttl = ttl or int(env_conf.get("TTL"))
+
+        self.key_algo = key_algo or "hmac-sha512"
 
     def get_records(self) -> Set[DNSRecord] | Set[None]:
         """Get existing DNS records matching our pattern"""
@@ -116,7 +119,7 @@ class NSUpdater:
         try:
             # Create DNS update message
             update_msg = dns.update.Update(
-                self.dns_zone, keyring=self.keyring, keyalgorithm="hmac-sha512"
+                self.dns_zone, keyring=self.keyring, keyalgorithm=self.key_algo
             )
 
             fqdn = record.name + "." + self.zone.to_text()
@@ -136,7 +139,7 @@ class NSUpdater:
         try:
             fqdn = record.name + "." + self.zone.to_text()
             update_msg = dns.update.Update(
-                self.dns_zone, keyring=self.keyring, keyalgorithm="hmac-sha512"
+                self.dns_zone, keyring=self.keyring, keyalgorithm=self.key_algo
             )
 
             # Remove all records for this name
