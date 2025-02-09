@@ -68,9 +68,9 @@ class NSUpdater:
             }
         )
 
-        self.ttl = ttl or int(env_conf.get("TTL"))
+        self.ttl = ttl or int(env_conf.get("TTL")) or 3600
 
-        self.key_algo = key_algo or "hmac-sha512"
+        self.key_algo = key_algo or env_conf.get("KEY_ALGO") or "hmac-sha512"
 
     def get_records(self) -> Set[DNSRecord] | Set[None]:
         """Get existing DNS records matching our pattern"""
