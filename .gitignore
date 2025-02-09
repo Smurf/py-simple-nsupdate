@@ -1,0 +1,7 @@
+build/
+*.egg-info
+.venv
+*.swp
+*.swo
+.env
+!.env.example
