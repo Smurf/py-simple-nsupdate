@@ -37,8 +37,8 @@ if __name__ == "__main__":
     new_record = DNSRecord(
         record_name,
         DNSRecordType.A,
-        ip_to_add,
-        self.ns_updater.ttl,
+        "192.168.1.100",
+        3600,
     )
     ns_updater.create_record(new_record)
     ns_updater.delete_record(new_record)
